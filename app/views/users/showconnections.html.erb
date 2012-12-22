@@ -1,0 +1,65 @@
+<%= stylesheet_link_tag  "bookstyle" %>
+<div class="sbnav1"> 
+	<ul> 
+		<li class="active">
+			<a class="a-tab1 active" href="#section-1" onclick="toggleDisplay('section-1'); return false;">
+				<span>Friends</span> <span class="badge badge-inverse"><%= @user.friends.count %></span>
+			</a>
+		</li> 
+		<li>
+			<a class="a-tab2" href="#section-2" onclick="toggleDisplay('section-2'); return false;">
+				<span>Friend Requests</span> <span class="badge badge-inverse"><%= @user.requested_friends.count %></span>
+			</a>
+		</li> 
+		<li>
+			<a class="a-tab3" href="#section-3" onclick="toggleDisplay('section-3'); return false;">
+				<span>Pending</span> <span class="badge badge-inverse"><%= @user.pending_friends.count %></span>
+			</a>
+		</li> 
+		<li>
+			<a class="a-tab4" href="#section-4" onclick="toggleDisplay('section-4'); return false;">
+				<span>Beamers</span>
+			</a>
+		</li> 
+		<li>
+			<a class="a-tab5" href="#section-4" onclick="toggleDisplay('section-4'); return false;">
+				<span>Find Beamers</span>
+			</a>
+		</li>
+	</ul> 
+
+</div>
+
+<div id="section-1" style="display:block;">
+		<%= render :partial => "friendships/friends" %>
+</div>
+
+<div id="section-2" style="display:none;">
+	<%= render :partial => "friendships/friendrequests" %>
+</div>
+
+<div id="section-3" style="display:none;">
+	<%= render :partial => "friendships/friendspending" %>
+</div>
+
+<div id="section-4" style="display:none;">
+	<%= render :partial => "friendships/all_connections", :locals => {:all_connections=>@all_connections}%>
+</div>
+
+
+<script>
+function toggleDisplay(divid) {
+	for(i=1;i<=4;i++)
+	{
+		if(divid=='section-'+i) 
+		{
+			document.getElementById(divid).style.display = 'block';
+		}
+		else
+		{
+			document.getElementById('section-'+i).style.display = 'none';
+		}
+	}
+}
+</script>
+

@@ -30,13 +30,12 @@ class ScribblesController < ApplicationController
   # POST /scribbles.json
   def create
     @scribble = Scribble.new(params[:scribble])
-    @scribble.posted_by_uid=current_user.id
+    @scribble.posted_by_uid=current_user.beamer_id
     @scribble.posted_by=current_user.first_name+" "+current_user.last_name
     @scribble.ups=0
     @scribble.downs=0
-    @scribble.save
     respond_to do |format|
-      if @scribble.save
+      if @scribble.save!
         format.html { redirect_to root_path }
         format.json { render :json => @scribble, :status => :created, :location => @scribble }
       else

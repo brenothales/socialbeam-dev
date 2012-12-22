@@ -11,26 +11,92 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121031064622) do
+ActiveRecord::Schema.define(:version => 20131002163159) do
+
+  create_table "friendships", :force => true do |t|
+    t.string   "beamer_id"
+    t.string   "friend_beamer_id"
+    t.string   "status"
+    t.datetime "created_at"
+  end
+
+  create_table "messages", :force => true do |t|
+    t.string   "sender_id",                              :null => false
+    t.string   "recepient_id"
+    t.boolean  "sender_deleted",    :default => false
+    t.boolean  "recepient_deleted", :default => false
+    t.string   "subject",                                :null => false
+    t.text     "body"
+    t.datetime "read_at"
+    t.string   "container",         :default => "draft"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
+
+  create_table "newsfeeds", :force => true do |t|
+    t.string   "verb"
+    t.string   "activity"
+    t.string   "actor_id"
+    t.string   "actor_type"
+    t.string   "actor_name_method"
+    t.string   "indirect_actor_id"
+    t.string   "indirect_actor_type"
+    t.string   "indirect_actor_name_method"
+    t.integer  "count",                      :default => 1
+    t.string   "object_id"
+    t.string   "object_type"
+    t.string   "object_name_method"
+    t.integer  "privacystatus",              :default => 0
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+  end
+
+  create_table "scribble_comments", :force => true do |t|
+    t.string   "commentor_id"
+    t.string   "commentor"
+    t.text     "body",                        :null => false
+    t.integer  "ups",          :default => 0
+    t.integer  "downs",        :default => 0
+    t.string   "scribble_id"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+  end
 
   create_table "scribbles", :force => true do |t|
     t.string   "post"
     t.string   "posted_by"
-    t.integer  "posted_by_uid"
+    t.string   "posted_by_uid"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.integer  "ups"
     t.integer  "downs"
+    t.string   "scribble_id",   :null => false
   end
 
   create_table "users", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "email"
-    t.string   "password_hash"
-    t.string   "password_salt"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.string   "email",               :default => "",       :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.string   "profile_name",        :default => "beamer"
+    t.string   "profile_id",                                :null => false
+    t.string   "beamer_id",                                 :null => false
+    t.string   "crypted_password",                          :null => false
+    t.string   "password_salt",                             :null => false
+    t.string   "persistence_token",                         :null => false
+    t.string   "single_access_token",                       :null => false
+    t.integer  "login_count",         :default => 0,        :null => false
+    t.integer  "failed_login_count",  :default => 0,        :null => false
+    t.datetime "last_request_at"
+    t.datetime "current_login_at"
+    t.datetime "last_login_at"
+    t.string   "current_login_ip"
+    t.string   "last_login_ip"
   end
+
+  add_index "users", ["beamer_id"], :name => "index_users_on_beamer_id", :unique => true
+  add_index "users", ["first_name"], :name => "index_users_on_first_name"
+  add_index "users", ["profile_id"], :name => "index_users_on_profile_id", :unique => true
 
 end

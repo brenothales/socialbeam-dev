@@ -1,19 +1,44 @@
 Socialbeam::Application.routes.draw do
+  resources :scribbles do
+    resources :scribble_comments
+  end
+  resources :users do |user|
+    resources :messages do
+      collection do
+        post 'delete_multiple'
+      end
+    end
+  end
+  resource :socialbeams do
+    collection do
+      get 'home'
+      get 'loadmorescribbles'
+    end
+  end
+  resources :user_sessions
+  resources :newsfeeds
+  root :to => 'socialbeams#home'
+  get  "refresh"  => "socialbeams#refreshscribbles", :as => "refresh"
+  get "votedup"  => "socialbeams#votedup", :as => "votedup"
+  get  "voteddown"  => "socialbeams#voteddown", :as => "voteddown"
 
-  resources :scribbles
-  resources :users
-  resources :sessions
-  root :to => 'browse#home'
-  get  "refresh"  => "browse#refreshscribbles", :as => "refresh"
-  get "votedup"  => "browse#votedup", :as => "votedup"
-  get  "voteddown"  => "browse#voteddown", :as => "voteddown"
-  
-  #Sessions Users
-  get "logout_user" => "sessions#destroy", :as => "logout_user"
-  post "login_user" => "sessions#new", :as => "login_user"
- 
- #Users
+  #Sessions & Users
+  get "logout_user" => "user_sessions#destroy", :as => "logout_user"
+  get "login_user" => "user_sessions#new", :as => "login_user"
   get "signup" => "users#new", :as => "signup"
+  match "/myconnections/:beamer_id" => "users#showconnections", :as=>"myconnections"
+  match "users/:beamer_id" => "users#show" , :as => 'profile'
+
+  resources :friendships do
+    collection do
+      get 'req',:as=>"addfriend"
+      get 'accept',:as=>"accept_fr"
+      get 'reject',:as=>"reject_fr"
+    end
+  end
+  #match "friendships/:beamer_id" => "friendships#req", :as=>"addfriend"
+  #match "friendships/:beamer_id" => "friendships#accept", :as=>"accept_fr"
+  #match "friendships/:beamer_id" => "friendships#reject", :as=>"reject_fr"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -67,5 +92,4 @@ Socialbeam::Application.routes.draw do
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id))(.:format)'
 end

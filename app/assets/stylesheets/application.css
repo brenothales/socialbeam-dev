@@ -9,8 +9,10 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
  */
-@import url('bootstrap.min.css');
-@import url('bootstrap-responsive.min.css');
+@import url('socialbeam.min.css');
+@import url('socialbeam-responsive.min.css');
+@import url('font-awesome.css');
 @import url('global.css');
+@import url('global_2.css');
+@import url('socialbeam-pagination.css');
