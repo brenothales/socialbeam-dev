@@ -31,7 +31,7 @@ class ScribblesController < ApplicationController
   def create
     @scribble = Scribble.new(params[:scribble])
     @scribble.posted_by_uid=current_user.beamer_id
-    @scribble.posted_by=current_user.first_name+" "+current_user.last_name
+    @scribble.posted_by=current_user.full_name
     @scribble.ups=0
     @scribble.downs=0
     respond_to do |format|

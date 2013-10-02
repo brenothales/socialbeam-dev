@@ -12,6 +12,10 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'jquery-rails','~>2.2.1'
   gem 'jquery-ui-rails','~>4.0.2'
+  gem "therubyracer"
+  gem 'less','~>2.4.0'
+	gem "less-rails",'~>2.4.2'
+	gem "twitter-bootstrap-rails",'~>2.2.8'
 end
 gem 'execjs','~>1.4.0'
 gem 'awesome_print','~>1.2.0'

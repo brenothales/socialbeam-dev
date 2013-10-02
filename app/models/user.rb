@@ -1,6 +1,15 @@
 class User < ActiveRecord::Base
   include BCrypt
   include Scrubber
+
+  #For OmniAuth
+  has_many :authorizations, :dependent => :destroy
+
+  #For Authlogic
+  acts_as_authentic do |c|
+    c.ignore_blank_passwords = true #ignoring passwords
+  end
+
   attr_accessible :email, :first_name, :last_name, :password, :password_confirmation
   serialize :omniauth_data, JSON
   #Scrubber Fields
@@ -23,14 +32,6 @@ class User < ActiveRecord::Base
       user.errors.add(:password, " and confirmation must match.") if user.password != user.password_confirmation
       user.errors.add(:password, " and confirmation should be atleast 4 characters long.") if user.password.length < 4 || user.password_confirmation.length < 4
     end
-  end
-  #For OmniAuth
-  has_many :authorizations, :dependent => :destroy
-
-  #For Authlogic
-  acts_as_authentic do |c|
-    c.ignore_blank_passwords = true #ignoring passwords
-    c.validate_password_field = false #ignoring validations for password fields
   end
 
   #Messages
