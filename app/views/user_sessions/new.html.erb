@@ -14,4 +14,14 @@
 <p class="submit">
   <button type="submit" name="submit"><i class="icon-arrow-right icon-large"></i></button>
 </p>
+<div class="social_network_authorize">
+  <h3>Sign in with</h3>
+  <% ["twitter","facebook", "linkedin","open_id"].each do |provider| %>
+    <% if provider !="open_id" %>
+      <%= link_to image_tag("auth/#{provider}_32.png"), "/auth/#{provider}" %>
+    <% else %>
+      <%= link_to image_tag("auth/#{provider}_32.png"), "/auth/#{provider}/openid_url=https://www.google.com/accounts/o8/id" %>
+    <% end %>
+  <% end %>
+</div>
 <% end %>

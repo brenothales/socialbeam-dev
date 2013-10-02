@@ -14,6 +14,7 @@ group :assets do
   gem 'jquery-ui-rails','~>4.0.2'
 end
 gem 'execjs','~>1.4.0'
+gem 'awesome_print','~>1.2.0'
 #Easy deployment in Amazon EC2
 gem 'capistrano','~>2.14.2'
 gem 'rvm-capistrano','~>1.2.7'
@@ -21,6 +22,11 @@ gem 'rvm-capistrano','~>1.2.7'
 gem "bcrypt-ruby", '~>3.0.1',:require => "bcrypt"
 #Authentication Framework
 gem 'authlogic','~>3.2.0'
+gem 'omniauth','~>1.1.4'
+gem 'omniauth-facebook','~>1.4.1'
+gem 'omniauth-twitter','~>1.0.0'
+gem 'omniauth-linkedin','~>0.1.0'
+gem 'omniauth-openid','~>1.0.1'
 #Paginations
 gem 'will_paginate', '~> 3.0'
 #Search Utility

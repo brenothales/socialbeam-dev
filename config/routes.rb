@@ -15,7 +15,14 @@ Socialbeam::Application.routes.draw do
       get 'loadmorescribbles'
     end
   end
+  
   resources :user_sessions
+  resources :authorizations
+  match '/auth/:provider/callback' => 'authorizations#create'
+  match '/auth/failure' => 'authorizations#failure'
+  match '/auth/:provider' => 'authorizations#blank'
+
+  
   resources :newsfeeds
   root :to => 'socialbeams#home'
   get  "refresh"  => "socialbeams#refreshscribbles", :as => "refresh"

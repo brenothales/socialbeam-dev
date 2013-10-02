@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131002163159) do
+ActiveRecord::Schema.define(:version => 20131002182735) do
+
+  create_table "authorizations", :force => true do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "friendships", :force => true do |t|
     t.string   "beamer_id"
@@ -82,17 +90,18 @@ ActiveRecord::Schema.define(:version => 20131002163159) do
     t.string   "profile_name",        :default => "beamer"
     t.string   "profile_id",                                :null => false
     t.string   "beamer_id",                                 :null => false
-    t.string   "crypted_password",                          :null => false
-    t.string   "password_salt",                             :null => false
-    t.string   "persistence_token",                         :null => false
-    t.string   "single_access_token",                       :null => false
-    t.integer  "login_count",         :default => 0,        :null => false
-    t.integer  "failed_login_count",  :default => 0,        :null => false
+    t.string   "crypted_password"
+    t.string   "password_salt"
+    t.string   "persistence_token"
+    t.string   "single_access_token"
+    t.integer  "login_count",         :default => 0
+    t.integer  "failed_login_count",  :default => 0
     t.datetime "last_request_at"
     t.datetime "current_login_at"
     t.datetime "last_login_at"
     t.string   "current_login_ip"
     t.string   "last_login_ip"
+    t.text     "omniauth_data"
   end
 
   add_index "users", ["beamer_id"], :name => "index_users_on_beamer_id", :unique => true
