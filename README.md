@@ -5,8 +5,8 @@ Social Discovery in socialbeam involves with discussion on categories,topics muc
 Sentiment Analysis, Ranking Algorithms, Recommendations, Open Discussions are some of the things we are trying to
 integrate in this social network project!
 
-(SOCIALBEAM is under active development)
-
+(SOCIALBEAM is under active development) - based on Ruby 1.9.3 , Rails 3.2.13, MySQL 5.5 etc.
+ 
 
 ## Features implemented
 1. Users(Beamers) - Normal User Registraions & Social Networks Auths
