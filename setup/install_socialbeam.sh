@@ -92,7 +92,7 @@
     \curl -L https://get.rvm.io | bash -s stable
     rvm install 1.9.3
     rvm --default use 1.9.3
-    gem update --system 1.5.3 # => Important
+    gem update --system 2.0.7 # => Important
     say_green "RVM + REE Installation Complete"
     echo "source $HOME/.rvm/scripts/rvm" >> ~/.bash_profile
     echo "source $HOME/.rvm/scripts/rvm" >> ~/.bashrc
@@ -111,7 +111,7 @@
 		say_green "Installing Ruby 1.9.3 in RVM"
 		rvm install 1.9.3
 		rvm --default use 1.9.3
-    gem update --system 1.5.3 # => Important
+    gem update --system 2.0.7 # => Important
     say_green "RVM + REE Installation Complete"
     #RVM Patch
     export CFLAGS='-O2 -fno-tree-dce -fno-optimize-sibling-calls'
